@@ -88,3 +88,22 @@ def plot(x, y, theta, save_path=None, correction=1.0):
     plt.ylabel('x2')
     if save_path is not None:
         plt.savefig(save_path)
+
+
+def plot_my(x, y, theta_1 = None, label = 'predict', filename = None):
+    plt.plot(x[y == 1, 0], x[y == 1, 1], 'bx', linewidth=2)
+    plt.plot(x[y == 0, 0], x[y == 0, 1], 'go', linewidth=2)
+    plt.xlabel('x1')
+    plt.ylabel('x2')
+
+    x1 = np.arange(min(x[:, 0]), max(x[:, 0]), 0.01)
+    x2 = -((theta_1[0] + theta_1[1] * x1) / theta_1[2])
+
+    plt.xlim(-2, 8)
+    plt.ylim(-200, 1000)
+    plt.title(label)
+    plt.plot(x1, x2, color='red', label=label, linewidth=2)
+
+    plt.show()
+    if filename is not None:
+        plt.savefig(filename)

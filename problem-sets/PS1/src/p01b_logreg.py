@@ -30,6 +30,15 @@ def main(train_path, eval_path, pred_path):
     y_pred = clf.predict(x_eval)
     np.savetxt(pred_path, y_pred > 0.5, fmt = '%d')
 
+    # question (f)
+    util.plot(x_train, y_train, clf.theta, save_path= 'output/p01f_logistic_{}.png'.format(pred_path[-5]))
+
+    # question (h): only apply to dataset 1
+    if pred_path[-5] == '1':
+        x_train[:, 2] = np.log(x_train[:, 2])
+        clf.fit(x_train, y_train)
+        util.plot(x_train, y_train, clf.theta, save_path='output/p01h_logistic_{}.png'.format(pred_path[-5]))
+
     # *** END CODE HERE ***
 
 
